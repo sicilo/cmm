@@ -1,16 +1,13 @@
 ---
+import type { Technology } from "../interfaces/technology.interfaces";
+
 import Layout from "../layout/Layout.astro";
+import SkillsCard from "../components/Astro/SkillsCard.astro";
 
 import vueLogo from "../public/assets/svg/vue.svg";
 import angularLogo from "../public/assets/svg/angular.svg";
 import netLogo from "../public/assets/svg/net.svg";
-
-interface Technology {
-    name: string;
-    category: string;
-    image: ImageMetadata;
-    description: string;
-}
+import sqlServerLogo from "../public/assets/svg/sql-server.svg";
 
 const technologies: Technology[] = [
     {
@@ -34,46 +31,32 @@ const technologies: Technology[] = [
         description:
             "jdlñas jlkdfjsldfjaldjgprjonnvaoror jaioirnda fji isadfiortugiudsafn difas",
     },
+    {
+        name: "SQL Server",
+        category: "databases",
+        image: sqlServerLogo,
+        description:
+            "jdlñas jlkdfjsldfjaldjgprjonnvaoror jaioirnda fji isadfiortugiudsafn difas",
+    },
 ];
 ---
 
 <Layout>
     <section class="bg-slate-800 w-full py-8">
-        <section class="container w-1/2 m-auto mt-8">
-            <h1 class="font-mono text-5xl text-slate-200 font-bold">
+        <section class=" m-auto mt-8 ">
+            <h1 class="w-1/2 m-auto font-mono text-5xl text-slate-200 font-bold">
                 Technical skills
             </h1>
 
-            <hr class="border border-b-2 border-pink-500 my-4 shadow-lg" />
+            <hr class="w-1/2 m-auto mb-10 border border-b-2 border-pink-500 my-4 shadow-lg" />
 
-            {
-                technologies.map((technology) => (
-                    <aside class="flex py-4 border-2 bg-slate-600 border-slate-500 mb-6 rounded-md w-3/4 m-auto hover:shadow-pink-500/30 hover:shadow-md">
-                        <aside class="basis-1/5 grow">
-                            <img
-                                src={technology.image.src}
-                                alt={technology.name}
-                                width="100"
-                                class="m-auto"
-                            />
-                        </aside>
-                        <aside class="basis-3/5 grow">
-                            <h2 class="font-mono text-slate-200 text-3xl mb-4">
-                                {technology.name} <span class:list={[
-                                    "py-1 px-1 rounded-md text-base",
-                                    {
-                                        'bg-blue-500':technology.category == 'backend',
-                                        'bg-green-500':technology.category == 'frontend',
-                                    }
-                                ]}>{technology.category}</span>
-                            </h2>
-                            <p class="font-mono text-slate-200">
-                                {technology.description}
-                            </p>
-                        </aside>
-                    </aside>
-                ))
-            }
+            <aside class="w-3/4 m-auto grid grid-cols-2 gap-x-6 gap-y-1">
+                {
+                    technologies.map((technology) => (
+                        <SkillsCard technology={technology} />
+                    ))
+                }
+            </aside>
         </section>
     </section>
 </Layout>
